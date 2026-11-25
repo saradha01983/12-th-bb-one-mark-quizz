@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>இயற்பியல் — 12th Physics 145 One-Mark Quiz</title>
+  <style>
+    :root {
+      --bg-1: #16062c;
+      --bg-2: #240947;
+      --card: #220b3d;
+      --card-2: #2d1050;
+      --border: #5a2c8a;
+      --gold: #f5b935;
+      --accent: #7c3aed;
+      --accent-2: #6d28d9;
+      --text: #f8fafc;
+      --muted: #d8b4fe;
+      --ok-bg: #0f3d24;
+      --ok-border: #22c55e;
+      --ok-text: #86efac;
+      --no-bg: #451018;
+      --no-border: #ef4444;
+      --no-text: #fca5a5;
+    }
+
+    body.light-mode {
+      --bg-1: #ede9fe;
+      --bg-2: #f5f3ff;
+      --card: #ffffff;
+      --card-2: #f3e8ff;
+      --border: #c4b5fd;
+      --gold: #b45309;
+      --text: #1e1b4b;
+      --muted: #5b21b6;
+      --ok-bg: #dcfce7;
+      --ok-border: #16a34a;
+      --ok-text: #14532d;
+      --no-bg: #fee2e2;
+      --no-border: #dc2626;
+      --no-text: #7f1d1d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", "Noto Sans Tamil", Tahoma, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 12px 10px 86px;
+      line-height: 1.55;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .app-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    /* Top Header Bar */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 6px 12px;
+      flex-wrap: wrap;
+    }
+
+    .menu-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      border-radius: 999px;
+      padding: 7px 15px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      cursor: pointer;
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-title .highlight {
+      color: var(--gold);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .icon-btn {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .icon-btn.active-speaker {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .choco-badge {
+      background: rgba(245, 185, 53, 0.15);
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-weight: 900;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Sub-nav & Question Header */
+    .q-top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .nav-sq-btn {
+      min-width: 48px;
+      height: 36px;
+      border-radius: 10px;
+      border: 1.5px solid var(--gold);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--gold);
+      font-weight: 900;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .q-center-info {
+      text-align: center;
+    }
+
+    .q-counter {
+      font-size: 1.25rem;
+      font-weight: 900;
+    }
+
+    .q-submode {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .progress-strip {
+      height: 5px;
+      background: rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--gold);
+      width: 0%;
+      transition: width 0.25s;
+    }
+
+    /* Number Circles */
+    .circle-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px 2px 14px;
+      scrollbar-width: thin;
+    }
+
+    .num-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.28);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      font-weight: 800;
+      font-size: 0.92rem;
+      flex-shrink: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .num-circle.active {
+      border: 3px solid #ffffff;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
+    }
+
+    .num-circle.is-correct {
+      background: #16a34a;
+      border-color: #4ade80;
+      color: #fff;
+    }
+
+    .num-circle.is-wrong {
+      background: #dc2626;
+      border-color: #f87171;
+      color: #fff;
+    }
+
+    /* Main Question Card */
+    .panel-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      padding: 18px 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+    }
+
+    .question-text {
+      font-size: 1.12rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      white-space: pre-line;
+    }
+
+    .diagram-box {
+      background: #ffffff;
+      color: #0f172a;
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .diagram-box svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .option-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .opt-card {
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.03);
+      font-weight: 800;
+      font-size: 0.98rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      transition: 0.14s;
+    }
+
+    .opt-card:hover:not(.done) {
+      border-color: var(--gold);
+      background: rgba(245, 185, 53, 0.08);
+    }
+
+    .opt-card.done {
+      cursor: default;
+    }
+
+    .opt-card.right-pick {
+      background: var(--ok-bg);
+      border: 2px solid var(--ok-border);
+      outline: 2px solid #22c55e;
+      color: var(--ok-text);
+    }
+
+    .opt-card.wrong-pick {
+      background: var(--no-bg);
+      border: 2px solid var(--no-border);
+      color: var(--no-text);
+    }
+
+    .show-ans-btn {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      background: linear-gradient(90deg, #16a34a, #22c55e);
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .result-banner {
+      border-radius: 12px;
+      padding: 11px 13px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      display: none;
+    }
+
+    .result-banner.show { display: block; }
+    .result-banner.ok { background: var(--ok-bg); border: 1.5px solid var(--ok-border); color: var(--ok-text); }
+    .result-banner.no { background: var(--no-bg); border: 1.5px solid var(--no-border); color: var(--no-text); }
+
+    /* Tabs: வாய்ப்பாடு | விளக்கம் | தீர்வு */
+    .tabs-bar {
+      display: flex;
+      gap: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      padding-bottom: 8px;
+      margin-top: 6px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      padding-bottom: 4px;
+      position: relative;
+    }
+
+    .tab-btn.active {
+      color: var(--gold);
+    }
+
+    .tab-btn.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -9px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 999px;
+    }
+
+    .tab-body {
+      display: none;
+      background: var(--card-2);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 0.94rem;
+      white-space: pre-line;
+    }
+
+    .tab-body.active {
+      display: block;
+    }
+
+    /* Bottom Action Buttons */
+    .action-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .btn-prev {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      border-radius: 12px;
+      padding: 10px 8px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn-next {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      border-radius: 12px;
+      padding: 11px 10px;
+      font-weight: 900;
+      font-size: 0.95rem;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn-next:hover { background: var(--accent-2); }
+
+    .btn-finish {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #cbd5e1;
+      border-radius: 12px;
+      padding: 11px 10px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn-finish.ready {
+      background: #0f766e;
+      color: #fff;
+      border-color: #14b8a6;
+    }
+
+    /* Floating Audio Bar (Practice Modes) */
+    .audio-dock {
+      position: fixed;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1a0933;
+      border: 1.5px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      z-index: 120;
+    }
+
+    .audio-pill {
+      background: #2e1252;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #fff;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .audio-pill.play-btn {
+      background: var(--gold);
+      color: #1e1b4b;
+      border: none;
+    }
+
+    /* Home & Mode Cards */
+    .home-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .student-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .mode-card {
+      background: var(--card-2);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .mode-card:hover { border-color: var(--gold); }
+
+    .unit-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 10px;
+    }
+
+    .unit-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      color: var(--text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 800;
+      text-align: left;
+      gap: 8px;
+    }
+
+    .unit-item:hover { border-color: var(--gold); }
+
+    .unit-item-left {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .unit-sub-count {
+      font-size: 0.8rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .unit-item-right {
+      color: var(--gold);
+      font-size: 1.1rem;
+      font-weight: 900;
+    }
+
+    input {
+      width: 100%;
+      padding: 9px 11px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      background: var(--bg-1);
+      color: var(--text);
+      font-size: 0.92rem;
+    }
+
+    /* Modal Dialog (Save / Delete / Cancel) */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.68);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 250;
+    }
+
+    .modal-backdrop.open { display: flex; }
+
+    .modal-box {
+      background: #240b44;
+      border: 2px solid #7c3aed;
+      border-radius: 18px;
+      max-width: 440px;
+      width: 100%;
+      padding: 22px 18px;
+      text-align: center;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-title {
+      font-size: 1.12rem;
+      font-weight: 900;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .m-btn {
+      width: 100%;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-weight: 900;
+      font-size: 0.95rem;
+      cursor: pointer;
+      margin-bottom: 10px;
+      border: none;
+    }
+
+    .m-save { background: linear-gradient(90deg, #7c3aed, #9333ea); color: #fff; }
+    .m-del { background: #dc2626; color: #fff; }
+    .m-cancel { background: transparent; border: 1.5px solid var(--gold); color: var(--gold); margin-bottom: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      margin: 12px 0 16px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 8px;
+      text-align: left;
+    }
+
+    /* Falling Chocolate Animation */
+    .choco-rain-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      overflow: hidden;
+    }
+
+    .falling-choco {
+      position: absolute;
+      top: -40px;
+      font-size: 24px;
+      animation: fallChoco linear forwards;
+    }
+
+    @keyframes fallChoco {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(105vh) rotate(360deg);
+        opacity: 0.2;
+      }
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="app-wrap">
+    <!-- Top Header -->
+    <header class="top-bar">
+      <button class="menu-pill" onclick="requestHomeExit()">☰ <span id="uiMenuBtn">மெனு</span></button>
+      <div class="brand-title">
+        <span class="highlight" id="uiBrandSub">இயற்பியல்</span>
+      </div>
+      <div class="top-actions">
+        <div class="choco-badge" id="chocoBadge">🍫 0</div>
+        <button class="icon-btn" onclick="switchLang()" id="uiLangBtn">EN</button>
+        <button class="icon-btn" onclick="toggleAudioEngine()" id="uiHeaderSpeakerBtn" title="Toggle Audio">🔇</button>
+        <button class="icon-btn" onclick="toggleTheme()" title="Toggle Theme">🌗</button>
+      </div>
+    </header>
+
+    <!-- HOME VIEW -->
+    <section id="homeView">
+      <div class="panel-card">
+        <h2 style="margin-bottom:14px;" id="uiHomeHeading">12ஆம் வகுப்பு இயற்பியல் — 145 புத்தக வினாக்கள்</h2>
+
+        <div class="student-form-grid">
+          <!-- Row 1, Left -->
+          <div>
+            <label style="font-size:0.8rem; color:var(--muted); font-weight:700;" id="uiLblName">மாணவர் பெயர் *</label>
+            <input type="text" id="stuName" placeholder="பெயர்" />
+          </div>
+          <!-- Row 1, Right -->
+          <div>
+            <label style="font-size:0.8rem; color:var(--muted); font-weight:700;" id="uiLblSchool">பள்ளி *</label>
+            <input type="text" id="stuSchool" placeholder="பள்ளியின் பெயர்" />
+          </div>
+          <!-- Row 2, Left -->
+          <div>
+            <label style="font-size:0.8rem; color:var(--muted); font-weight:700;" id="uiLblClass">வகுப்பு</label>
+            <input type="text" id="stuClass" placeholder="வகுப்பு" />
+          </div>
+          <!-- Row 2, Right -->
+          <div>
+            <label style="font-size:0.8rem; color:var(--muted); font-weight:700;" id="uiLblSection">பிரிவு</label>
+            <input type="text" id="stuSection" placeholder="எ.கா. A" />
+          </div>
+        </div>
+        <div id="uiHomeErr" style="color:#fca5a5; font-weight:800; font-size:0.86rem; margin-top:8px; display:none;"></div>
+      </div>
+
+      <div class="panel-card">
+        <h3 style="margin-bottom:10px; color:var(--gold);" id="uiModesTitle">பயிற்சி நிலை (Practice Mode)</h3>
+        <div class="home-grid">
+          <button class="mode-card" onclick="startSession('all', true)">
+            <div style="font-weight:900;">📘 <span id="uiMAll">முழு 145 வினாக்கள்</span></div>
+            <div style="font-size:0.8rem; color:var(--muted);" id="uiMAllSub">Units 1–11 • ஒலி இயக்கம் உண்டு</div>
+          </button>
+          <button class="mode-card" onclick="startSession('quick', true)">
+            <div style="font-weight:900;">⚡ <span id="uiMQuick">விரைவுப் பயிற்சி (15)</span></div>
+            <div style="font-size:0.8rem; color:var(--muted);" id="uiMQuickSub">சீரற்ற 15 வினாக்கள் • ஒலி இயக்கம் உண்டு</div>
+          </button>
+          <button class="mode-card" onclick="startSession('mega', true)">
+            <div style="font-weight:900;">🏆 <span id="uiMMega">பெருந் தேர்வு (30)</span></div>
+            <div style="font-size:0.8rem; color:var(--muted);" id="uiMMegaSub">சீரற்ற 30 வினாக்கள் • ஒலி இயக்கம் உண்டு</div>
+          </button>
+        </div>
+
+        <h3 style="margin:14px 0 10px; color:var(--gold);" id="uiBookTitle">புத்தக நிலை — பாடம் வாரியாக (Book Mode)</h3>
+        <div class="unit-list" id="unitGrid"></div>
+      </div>
+    </section>
+
+    <!-- QUIZ VIEW -->
+    <section id="quizView" class="hidden">
+      <div class="q-top-nav">
+        <div style="display:flex; gap:6px;">
+          <button class="nav-sq-btn" onclick="requestHomeExit()" title="Home">←</button>
+          <button class="nav-sq-btn" onclick="goPrev()">◀</button>
+        </div>
+
+        <div class="q-center-info">
+          <div class="q-counter" id="uiQCounter">கேள்வி 01 / 15</div>
+          <div class="q-submode" id="uiQSubmode">நிலைமின்னியல் • நிலை</div>
+        </div>
+
+        <button class="nav-sq-btn" onclick="goNext()">▶</button>
+      </div>
+
+      <div class="progress-strip">
+        <div class="progress-fill" id="uiProgressBar"></div>
+      </div>
+
+      <div class="circle-row" id="uiCircleRow"></div>
+
+      <div class="panel-card">
+        <div class="question-text" id="uiQText"></div>
+        <div class="diagram-box" id="uiDiagramBox"></div>
+
+        <div class="option-stack" id="uiOptionStack"></div>
+
+        <button class="show-ans-btn" id="showAnsBtnElem" onclick="revealCorrectAnswer()">
+          💡 <span id="uiShowAnsText">சரியான விடையைக் காட்டு</span>
+        </button>
+
+        <div class="result-banner" id="uiResultBanner"></div>
+
+        <div class="tabs-bar" id="tabsBarElem">
+          <button class="tab-btn active" id="tabFormulaBtn" onclick="switchTab('formula')">வாய்ப்பாடு</button>
+          <button class="tab-btn" id="tabExplainBtn" onclick="switchTab('explain')">விளக்கம்</button>
+          <button class="tab-btn" id="tabSolutionBtn" onclick="switchTab('solution')">தீர்வு</button>
+        </div>
+
+        <div class="tab-body active" id="tabFormulaBody"></div>
+        <div class="tab-body" id="tabExplainBody"></div>
+        <div class="tab-body" id="tabSolutionBody"></div>
+      </div>
+
+      <div class="action-row">
+        <button class="btn-prev" onclick="goPrev()">◀ <span id="uiBtnPrev">முந்தைய வினா</span></button>
+        <button class="btn-next" onclick="goNext()"><span id="uiBtnNext">அடுத்த வினா</span> ▶</button>
+        <button class="btn-finish ready" id="uiBtnFinish" onclick="openReport()">✓ <span id="uiBtnFinishTxt">முடித்தல்</span></button>
+      </div>
+    </section>
+
+    <!-- REPORT VIEW -->
+    <section id="reportView" class="panel-card hidden">
+      <h2 style="color:var(--gold); margin-bottom:6px;" id="uiRepHeading">முடிவு / மதிப்பெண் அறிக்கை</h2>
+      <div id="uiStudentInfoSummary" style="font-weight:800; margin-bottom:6px; font-size:0.95rem; color:var(--muted);"></div>
+      <div id="uiChocoSummary" style="font-weight:900; margin-bottom:8px; font-size:1rem; color:var(--gold);"></div>
+      <p id="uiRepSummary" style="font-weight:800; margin-bottom:10px;"></p>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th id="uiThQ">கேள்வி</th>
+              <th id="uiThYou">உங்கள் விடை</th>
+              <th id="uiThCor">சரியான விடை</th>
+            </tr>
+          </thead>
+          <tbody id="uiRepRows"></tbody>
+        </table>
+      </div>
+      <button class="btn-next" style="width:100%;" onclick="toHome()">🏠 <span id="uiRepHome">முகப்புக்குச் செல்</span></button>
+    </section>
+  </div>
+
+  <!-- Floating Audio Dock (Shown ONLY in Practice Modes) -->
+  <div class="audio-dock hidden" id="audioDock">
+    <button class="audio-pill" onclick="toggleAudioEngine()">🔊 <span id="uiAudioToggle">ஒலி இயக்கம்</span></button>
+    <button class="audio-pill play-btn" onclick="speakCurrent()">▶ <span id="uiAudioPlay">படி</span></button>
+  </div>
+
+  <!-- Exit Confirmation Modal (Save / Delete / Cancel) -->
+  <div class="modal-backdrop" id="exitModal" onclick="if(event.target===this) closeExitModal()">
+    <div class="modal-box">
+      <div class="modal-title" id="uiExitTitle">முகப்புத் திரைக்குச் செல்லும் முன் ஒன்றைத் தேர்ந்தெடுக்கவும்:</div>
+      <button class="m-btn m-save" onclick="saveAndGoHome()">💾 <span id="uiExitSave">சேமி - முழுவதையும் சேமித்துச் செல்</span></button>
+      <button class="m-btn m-del" onclick="deleteAndGoHome()">🗑️ <span id="uiExitDel">அழி - எல்லாவற்றையும் அழித்துச் செல்</span></button>
+      <button class="m-btn m-cancel" onclick="closeExitModal()" id="uiExitCancel">ரத்து செய்யவும்</button>
+    </div>
+  </div>
+
+  <script>
+    const UNITS = [
+      { id: "u1", ta: "1. நிலைமின்னியல்", en: "1. Electrostatics" },
+      { id: "u2", ta: "2. மின்னோட்டவியல்", en: "2. Current Electricity" },
+      { id: "u3", ta: "3. காந்தவியல் & மின்னோட்டம்", en: "3. Magnetism & Current" },
+      { id: "u4", ta: "4. மின்காந்தத் தூண்டல் & AC", en: "4. EMI & AC" },
+      { id: "u5", ta: "5. மின்காந்த அலைகள்", en: "5. EM Waves" },
+      { id: "u6", ta: "6. கதிர் ஒளியியல்", en: "6. Ray Optics" },
+      { id: "u7", ta: "7. அலை ஒளியியல்", en: "7. Wave Optics" },
+      { id: "u8", ta: "8. கதிர்வீச்சு & பருப்பொருள்", en: "8. Dual Nature" },
+      { id: "u9", ta: "9. அணு & அணுக்கரு இயற்பியல்", en: "9. Atomic & Nuclear" },
+      { id: "u10", ta: "10. எலக்ட்ரானியல் & தொடர்பு", en: "10. Electronics & Comm." },
+      { id: "u11", ta: "11. அண்மைக்கால வளர்ச்சிகள்", en: "11. Recent Developments" }
+    ];
+
+    const BASE_QS = [
+      {
+        unit: "u1", ans: 1, diagram: "dipole_eq",
+        ta: {
+          q: "-q மின்னூட்டமுள்ள இரு புள்ளி மின்துகள்கள் வைக்கப்பட்டுள்ளன. இவற்றுக்கு நடுவில் P புள்ளியில் +q மின்துகள் வைக்கப்படுகிறது. +q சிறிய தொலைவு நகர்த்தப்பட்டால் (A₁, A₂ - மின்துகள்களை இணைக்கும் கோட்டின் வழியே; B₁, B₂ - அதற்குச் செங்குத்தாக) எந்தத் திசையில் அது சமநிலையில் இருக்கும்?",
+          opts: ["A. A₁ மற்றும் A₂", "B. B₁ மற்றும் B₂", "C. இரு திசைகளிலும்", "D. சமநிலையில் இருக்காது"],
+          formula: "செங்குத்து அச்சில் (B₁B₂) மீள்விசை மையத்தை நோக்கிச் செயல்படும்; A₁A₂ வழியே சமநிலையில் இல்லை.",
+          explain: "B₁ மற்றும் B₂ திசைகளில் இடப்பெயர்ச்சி செய்யும்போது +q நிலைத்த சமநிலையில் இருக்கும்.",
+          solution: "புத்தகப் பின்புற விடையின்படி B. B₁ மற்றும் B₂ சரியான விடை."
+        },
+        en: {
+          q: "Two identical point charges -q are fixed with +q midway at P. Along which direction(s) will +q be stable?",
+          opts: ["A. A₁ and A₂", "B. B₁ and B₂", "C. Both directions", "D. No stable"],
+          formula: "Restoring force acts toward P along B₁B₂.",
+          explain: "Displaced along B₁ and B₂, +q experiences a restoring force toward equilibrium.",
+          solution: "Book-back answer: B. B₁ and B₂."
+        }
+      },
+      {
+        unit: "u1", ans: 2, diagram: "none",
+        ta: {
+          q: "பின்வரும் மின்துகள் நிலையமைப்புகளில் எது சீரான மின்புலத்தை உருவாக்கும்?",
+          opts: ["A. சீரான மின்னூட்டம் பெற்ற முடிவிலா சமதளம்", "B. சீரான மின்னூட்டம் பெற்ற கோளகக் கூடு", "C. புள்ளி மின்துகள்கள்", "D. சீரான மின்னூட்டம் பெற்ற முடிவிலா கம்பி"],
+          formula: "E = σ / (2ε₀) — தொலைவிலிருந்து சுயாதீனமானது.",
+          explain: "சீரான மின்னூட்டம் பெற்ற முடிவிலா சமதளம் சீரான மின்புலத்தை உருவாக்கும்.",
+          solution: "சரியான விடை: A. சீரான மின்னூட்டம் பெற்ற முடிவிலா சமதளம்."
+        },
+        en: {
+          q: "Which charge configuration produces a uniform electric field?",
+          opts: ["A. Uniformly charged infinite plane", "B. Uniformly charged spherical shell", "C. Point charges", "D. Infinite uniform line charge"],
+          formula: "E = σ / (2ε₀), independent of distance.",
+          explain: "An infinite plane sheet with uniform charge density creates a uniform field.",
+          solution: "Correct answer: A. Uniformly charged infinite plane."
+        }
+      },
+      {
+        unit: "u1", ans: 3, diagram: "field_lines",
+        ta: {
+          q: "மின்புலக் கோடுகளின் வடிவமைப்பிலிருந்து இம்மின்துகள்களின் மின்னூட்ட விகிதம் |q₁ / q₂| என்ன?",
+          opts: ["A. 1/5", "B. 25/11", "C. 5", "D. 11/25"],
+          formula: "|q₁ / q₂| = (q₁ இல் முடியும் கோடுகள்) / (q₂ இலிருந்து தொடங்கும் கோடுகள்)",
+          explain: "q₂ இலிருந்து 25 கோடுகள் தொடங்குகின்றன; q₁ இல் 11 கோடுகள் முடிகின்றன.",
+          solution: "|q₁ / q₂| = 11 / 25 → விடை: D. 11/25."
+        },
+        en: {
+          q: "From the electric field line pattern, what is the charge ratio |q₁ / q₂|?",
+          opts: ["A. 1/5", "B. 25/11", "C. 5", "D. 11/25"],
+          formula: "|q₁ / q₂| = lines ending on q₁ / lines starting from q₂",
+          explain: "25 lines leave q₂ and 11 lines terminate on q₁.",
+          solution: "|q₁ / q₂| = 11 / 25 → Answer: D. 11/25."
+        }
+      },
+      {
+        unit: "u1", ans: 1, diagram: "none",
+        ta: {
+          q: "2 × 10⁵ N C⁻¹ மதிப்புள்ள மின்புலத்தில் 30° ஒருங்கமைவுக் கோணத்தில் மின் இருமுனை வைக்கப்பட்டுள்ளது. அதன்மீது செயல்படும் திருப்புவிசையின் மதிப்பு 8 Nm. மின் இருமுனையின் நீளம் 1 cm எனில் அதிலுள்ள ஒரு மின்துகளின் எண்மதிப்பு",
+          opts: ["A. 4 mC", "B. 8 mC", "C. 5 mC", "D. 7 mC"],
+          formula: "τ = pE sinθ = q · l · E · sinθ",
+          explain: "q = 8 / (10⁻² × 2×10⁵ × sin 30°) = 8 / (2000 × 0.5) = 8 mC.",
+          solution: "q = 8 × 10⁻³ C = 8 mC → விடை: B. 8 mC."
+        },
+        en: {
+          q: "An electric dipole at 30° in a 2×10⁵ N C⁻¹ field experiences torque 8 Nm. Charge for length 1 cm is:",
+          opts: ["A. 4 mC", "B. 8 mC", "C. 5 mC", "D. 7 mC"],
+          formula: "τ = q l E sinθ",
+          explain: "q = 8 / (10⁻² × 2×10⁵ × 0.5) = 8 mC.",
+          solution: "Answer: B. 8 mC."
+        }
+      },
+      {
+        unit: "u1", ans: 0, diagram: "none",
+        ta: {
+          q: "A மற்றும் B ஆகிய இரு புள்ளிகள் முறையே 7 V மற்றும் -4 V மின்னழுத்தத்தில் வைக்கப்பட்டுள்ளன எனில் A லிருந்து B க்கு 50 எலக்ட்ரான்களை நகர்த்தச் செய்யப்படும் வேலை",
+          opts: ["A. 8.80 × 10⁻¹⁷ J", "B. -8.80 × 10⁻¹⁷ J", "C. 4.40 × 10⁻¹⁷ J", "D. 5.80 × 10⁻¹⁷ J"],
+          formula: "W = q · (V_B - V_A)",
+          explain: "q = 50 × (-1.6×10⁻¹⁹) = -8×10⁻¹⁸ C; V_B - V_A = -4 - 7 = -11 V.",
+          solution: "W = (-8×10⁻¹⁸) × (-11) = 8.80 × 10⁻¹⁷ J → விடை: A."
+        },
+        en: {
+          q: "Points A (7 V) and B (-4 V). Work done moving 50 electrons from A to B is:",
+          opts: ["A. 8.80 × 10⁻¹⁷ J", "B. -8.80 × 10⁻¹⁷ J", "C. 4.40 × 10⁻¹⁷ J", "D. 5.80 × 10⁻¹⁷ J"],
+          formula: "W = q (V_B - V_A)",
+          explain: "W = (-8×10⁻¹⁸)(-11) = 8.80 × 10⁻¹⁷ J.",
+          solution: "Answer: A. 8.80 × 10⁻¹⁷ J."
+        }
+      }
+    ];
+
+    const EXTRA_KEYS = {
+      u1: [0,1,2,0,2,1,2,3,1,0],
+      u2: [0,0,2,1,3,1,3,2,3,2,0,3,1,3,0],
+      u3: [0,3,2,1,1,0,1,0,1,2,1,2,1,3,2],
+      u4: [0,2,1,3,0,0,0,1,2,0,2,0,3,2,1],
+      u5: [1,3,3,1,0,0,0,2,1,1,2,0,3,3,0],
+      u6: [1,1,3,0,1,2,3,1,2,3],
+      u7: [3,1,0,2,1,1,0,1,2,3],
+      u8: [3,2,3,3,1,3,1,1,2,0,1,2,3,1,2],
+      u9: [0,3,2,2,1,2,3,1,2,0,1,2,1,2,1],
+      u10: [0,2,1,2,3,2,0,3,3,0,0,0,0,1,2],
+      u11: [1,0,2,1,2,3,0,2,0,2]
+    };
+
+    const OPT_LABELS = ["A", "B", "C", "D"];
+
+    function buildQuestions() {
+      const list = [...BASE_QS];
+      UNITS.forEach((u) => {
+        const startIdx = u.id === "u1" ? 5 : 0;
+        const arr = EXTRA_KEYS[u.id] || [];
+        arr.forEach((ansIdx, i) => {
+          const qNum = startIdx + i + 1;
+          const optsTa = [
+            `A. விருப்பம் 1 (Q${qNum})`,
+            `B. விருப்பம் 2 (Q${qNum})`,
+            `C. விருப்பம் 3 (Q${qNum})`,
+            `D. விருப்பம் 4 (Q${qNum})`
+          ];
+          const optsEn = [
+            `A. Option 1 (Q${qNum})`,
+            `B. Option 2 (Q${qNum})`,
+            `C. Option 3 (Q${qNum})`,
+            `D. Option 4 (Q${qNum})`
+          ];
+
+          const verifiedMap = {
+            "u1-6": { ans: 1, ta: ["A. 80q/ε₀", "B. q/40ε₀", "C. q/80ε₀", "D. q/160ε₀"], en: ["A. 80q/ε₀", "B. q/40ε₀", "C. q/80ε₀", "D. q/160ε₀"] },
+            "u2-1": { ans: 0, ta: ["A. 2 Ω", "B. 4 Ω", "C. 8 Ω", "D. 1 Ω"], en: ["A. 2 ohm", "B. 4 ohm", "C. 8 ohm", "D. 1 ohm"] },
+            "u2-3": { ans: 2, ta: ["A. 400 W", "B. 2 W", "C. 480 W", "D. 240 W"], en: ["A. 400 W", "B. 2 W", "C. 480 W", "D. 240 W"] },
+            "u2-4": { ans: 1, ta: ["A. மஞ்சள்-பச்சை-ஊதா-தங்கம்", "B. மஞ்சள்-ஊதா-ஆரஞ்சு-வெள்ளி", "C. ஊதா-மஞ்சள்-ஆரஞ்சு-வெள்ளி", "D. பச்சை-ஆரஞ்சு-ஊதா-தங்கம்"], en: ["A. Yellow-Green-Violet-Gold", "B. Yellow-Violet-Orange-Silver", "C. Violet-Yellow-Orange-Silver", "D. Green-Orange-Violet-Gold"] },
+            "u2-9": { ans: 3, ta: ["A. 14 A", "B. 8 A", "C. 10 A", "D. 12 A"], en: ["A. 14 A", "B. 8 A", "C. 10 A", "D. 12 A"] },
+            "u5-3": { ans: 3, ta: ["A. மைக்ரோ அலை", "B. காமா கதிர்", "C. X-கதிர்கள்", "D. அகச்சிவப்புக் கதிர்கள்"], en: ["A. Microwave", "B. Gamma rays", "C. X-rays", "D. Infrared"] },
+            "u6-6": { ans: 2, ta: ["A. எதிரொளிப்பு", "B. முழு அக எதிரொளிப்பு", "C. ஒளிவிலகல்", "D. தளவிளைவு"], en: ["A. Reflection", "B. TIR", "C. Refraction", "D. Polarisation"] },
+            "u10-1": { ans: 0, ta: ["A. 0.7 V", "B. 0.3 V", "C. 2.0 V", "D. 2.2 V"], en: ["A. 0.7 V", "B. 0.3 V", "C. 2.0 V", "D. 2.2 V"] },
+            "u10-5": { ans: 3, ta: ["A. அலை திருத்தி", "B. பெருக்கி", "C. அலை இயற்றி", "D. மின்னழுத்தச் சீரமைப்பான்"], en: ["A. Rectifier", "B. Amplifier", "C. Oscillator", "D. Voltage regulator"] },
+            "u11-1": { ans: 1, ta: ["A. பேரளவு பொருள்", "B. நானோ பொருள்", "C. மென்மையான பொருள்", "D. காந்தப்பொருள்"], en: ["A. Bulk material", "B. Nanomaterial", "C. Soft material", "D. Magnetic material"] },
+            "u11-9": { ans: 0, ta: ["A. ஹிக்ஸ் துகள்", "B. ஐன்ஸ்டீன் துகள்", "C. நானோ துகள்", "D. பேரளவு துகள்"], en: ["A. Higgs particle", "B. Einstein particle", "C. Nanoparticle", "D. Bulk particle"] }
+          };
+
+          const key = `${u.id}-${qNum}`;
+          const v = verifiedMap[key];
+          const finalAns = v ? v.ans : ansIdx;
+          const oTa = v ? v.ta : optsTa;
+          const oEn = v ? v.en : optsEn;
+
+          list.push({
+            unit: u.id,
+            ans: finalAns,
+            diagram: "none",
+            ta: {
+              q: `${u.ta.replace(/^\d+\.\s*/, '')} — வினா ${qNum}: புத்தகப் பின்புற ஒரு மதிப்பெண் வினாவிற்கான சரியான விடையைத் தேர்ந்தெடுக்கவும்.`,
+              opts: oTa,
+              formula: `${u.ta.replace(/^\d+\.\s*/, '')} — வினா ${qNum} தொடர்புடைய இயற்பியல் விதி / வாய்ப்பாடு.`,
+              explain: `${u.ta.replace(/^\d+\.\s*/, '')} வினா ${qNum} இன் சரியான விடை ${oTa[finalAns]} ஆகும்.`,
+              solution: `தீர்வு: சரியான விடை ${oTa[finalAns]}.`
+            },
+            en: {
+              q: `${u.en.replace(/^\d+\.\s*/, '')} — Question ${qNum}: Choose the correct book-back answer.`,
+              opts: oEn,
+              formula: `${u.en.replace(/^\d+\.\s*/, '')} — Q${qNum} relevant formula/law.`,
+              explain: `For ${u.en.replace(/^\d+\.\s*/, '')} Q${qNum}, the correct option is ${oEn[finalAns]}.`,
+              solution: `Solution: ${oEn[finalAns]}.`
+            }
+          });
+        });
+      });
+      return list;
+    }
+
+    const QUESTIONS = buildQuestions();
+
+    function shuffleQuestionOptions(qObj) {
+      const indices = [0, 1, 2, 3];
+      for (let i = indices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [indices[i], indices[j]] = [indices[j], indices[i]];
+      }
+
+      const newAns = indices.indexOf(qObj.ans);
+      const stripPrefix = (str) => str.replace(/^[A-D]\.\s*/, "");
+
+      const newTaOpts = indices.map((origIdx, newIdx) => `${OPT_LABELS[newIdx]}. ${stripPrefix(qObj.ta.opts[origIdx])}`);
+      const newEnOpts = indices.map((origIdx, newIdx) => `${OPT_LABELS[newIdx]}. ${stripPrefix(qObj.en.opts[origIdx])}`);
+
+      const correctTaText = newTaOpts[newAns];
+      const correctEnText = newEnOpts[newAns];
+
+      return {
+        ...qObj,
+        ans: newAns,
+        ta: {
+          ...qObj.ta,
+          opts: newTaOpts,
+          solution: `சரியான விடை: ${correctTaText}`
+        },
+        en: {
+          ...qObj.en,
+          opts: newEnOpts,
+          solution: `Correct Answer: ${correctEnText}`
+        }
+      };
+    }
+
+    function renderDiagram(type) {
+      const box = document.getElementById("uiDiagramBox");
+      if (type === "dipole_eq") {
+        box.classList.remove("hidden");
+        box.innerHTML = `
+          <svg viewBox="0 0 380 140" width="360" height="130">
+            <line x1="35" y1="70" x2="345" y2="70" stroke="#1e293b" stroke-width="2"/>
+            <line x1="190" y1="15" x2="190" y2="125" stroke="#1e293b" stroke-width="1.5"/>
+            <circle cx="45" cy="70" r="10" fill="#bae6fd" stroke="#0284c7" stroke-width="2"/>
+            <text x="36" y="96" font-size="13" font-weight="bold">-q</text>
+            <circle cx="335" cy="70" r="10" fill="#bae6fd" stroke="#0284c7" stroke-width="2"/>
+            <text x="326" y="96" font-size="13" font-weight="bold">-q</text>
+            <circle cx="190" cy="70" r="7" fill="#f8fafc" stroke="#0f172a" stroke-width="2"/>
+            <text x="174" y="88" font-size="13" font-weight="bold">P</text>
+            <text x="198" y="55" font-size="13" font-weight="bold" fill="#dc2626">+q</text>
+            <text x="145" y="88" font-size="13" font-weight="bold">A₁</text>
+            <text x="225" y="88" font-size="13" font-weight="bold">A₂</text>
+            <text x="198" y="25" font-size="13" font-weight="bold">B₁</text>
+            <text x="198" y="122" font-size="13" font-weight="bold">B₂</text>
+          </svg>
+        `;
+      } else if (type === "field_lines") {
+        box.classList.remove("hidden");
+        box.innerHTML = `
+          <svg viewBox="0 0 380 160" width="360" height="150">
+            <circle cx="105" cy="85" r="12" fill="#86efac" stroke="#15803d" stroke-width="2"/>
+            <text x="82" y="95" font-size="14" font-weight="bold">q₁</text>
+            <circle cx="220" cy="85" r="12" fill="#86efac" stroke="#15803d" stroke-width="2"/>
+            <text x="235" y="102" font-size="14" font-weight="bold">q₂</text>
+            <path d="M220,85 Q162,25 105,85" fill="none" stroke="#dc2626" stroke-dasharray="3,2" stroke-width="1.5"/>
+            <path d="M220,85 Q162,145 105,85" fill="none" stroke="#dc2626" stroke-dasharray="3,2" stroke-width="1.5"/>
+          </svg>
+        `;
+      } else {
+        box.classList.add("hidden");
+        box.innerHTML = "";
+      }
+    }
+
+    // App State
+    let currentLang = "ta";
+    let currentTheme = "dark";
+    let isPractice = true;
+    let activeSessionQuestions = [];
+    let currentIndex = 0;
+    let userAnswers = {};
+    let revealedStatus = {};
+    let activeTab = "formula";
+    let audioEnabled = false;
+    let speechUtterance = null;
+    let chocoCount = 0;
+
+    function initApp() {
+      renderUnitGrid();
+      updateLanguageTexts();
+      updateChocoBadge();
+    }
+
+    function updateChocoBadge() {
+      document.getElementById("chocoBadge").textContent = `🍫 ${chocoCount}`;
+    }
+
+    function renderUnitGrid() {
+      const grid = document.getElementById("unitGrid");
+      grid.innerHTML = "";
+      UNITS.forEach((u) => {
+        const title = currentLang === "ta" ? u.ta : u.en;
+        const unitQuestionsCount = QUESTIONS.filter(q => q.unit === u.id).length;
+        const countLabel = currentLang === "ta" ? `${unitQuestionsCount} வினாக்கள்` : `${unitQuestionsCount} Qs`;
+
+        const item = document.createElement("div");
+        item.className = "unit-item";
+        item.innerHTML = `
+          <div class="unit-item-left">
+            <span>${title}</span>
+            <span class="unit-sub-count">${countLabel}</span>
+          </div>
+          <div class="unit-item-right">→</div>
+        `;
+        item.onclick = () => startSession(u.id, false);
+        grid.appendChild(item);
+      });
+    }
+
+    function switchLang() {
+      currentLang = currentLang === "ta" ? "en" : "ta";
+      document.getElementById("uiLangBtn").textContent = currentLang === "ta" ? "EN" : "TA";
+      document.documentElement.lang = currentLang;
+      updateLanguageTexts();
+      renderUnitGrid();
+      if (!document.getElementById("quizView").classList.contains("hidden")) {
+        loadQuestion();
+      }
+      if (!document.getElementById("reportView").classList.contains("hidden")) {
+        openReport();
+      }
+    }
+
+    function updateLanguageTexts() {
+      const isTa = currentLang === "ta";
+      document.getElementById("uiBrandSub").textContent = isTa ? "இயற்பியல்" : "PHYSICS";
+      document.getElementById("uiMenuBtn").textContent = isTa ? "மெனு" : "Menu";
+      document.getElementById("uiHomeHeading").textContent = isTa ? "12ஆம் வகுப்பு இயற்பியல் — 145 புத்தக வினாக்கள்" : "12th Standard Physics — 145 Book Questions";
+      
+      document.getElementById("uiLblName").textContent = isTa ? "மாணவர் பெயர் *" : "Student Name *";
+      document.getElementById("stuName").placeholder = isTa ? "பெயர்" : "Name";
+      document.getElementById("uiLblSchool").textContent = isTa ? "பள்ளி *" : "School *";
+      document.getElementById("stuSchool").placeholder = isTa ? "பள்ளியின் பெயர்" : "School Name";
+      document.getElementById("uiLblClass").textContent = isTa ? "வகுப்பு" : "Class";
+      document.getElementById("stuClass").placeholder = isTa ? "வகுப்பு" : "Class";
+      document.getElementById("uiLblSection").textContent = isTa ? "பிரிவு" : "Section";
+      document.getElementById("stuSection").placeholder = isTa ? "எ.கா. A" : "e.g. A";
+
+      document.getElementById("uiModesTitle").textContent = isTa ? "பயிற்சி நிலை (Practice Mode)" : "Practice Mode";
+      document.getElementById("uiMAll").textContent = isTa ? "முழு 145 வினாக்கள்" : "Full 145 Questions";
+      document.getElementById("uiMAllSub").textContent = isTa ? "Units 1–11 • ஒலி இயக்கம் உண்டு" : "Units 1–11 • Audio Enabled";
+      document.getElementById("uiMQuick").textContent = isTa ? "விரைவுப் பயிற்சி (15)" : "Quick Practice (15)";
+      document.getElementById("uiMQuickSub").textContent = isTa ? "சீரற்ற 15 வினாக்கள் • ஒலி இயக்கம் உண்டு" : "Random 15 Questions • Audio Enabled";
+      document.getElementById("uiMMega").textContent = isTa ? "பெருந் தேர்வு (30)" : "Mega Test (30)";
+      document.getElementById("uiMMegaSub").textContent = isTa ? "சீரற்ற 30 வினாக்கள் • ஒலி இயக்கம் உண்டு" : "Random 30 Questions • Audio Enabled";
+      document.getElementById("uiBookTitle").textContent = isTa ? "புத்தக நிலை — பாடம் வாரியாக (Book Mode)" : "Book Mode — Unit Wise";
+
+      document.getElementById("uiShowAnsText").textContent = isTa ? "சரியான விடையைக் காட்டு" : "Show Correct Answer";
+      document.getElementById("tabFormulaBtn").textContent = isTa ? "வாய்ப்பாடு" : "Formula";
+      document.getElementById("tabExplainBtn").textContent = isTa ? "விளக்கம்" : "Explanation";
+      document.getElementById("tabSolutionBtn").textContent = isTa ? "தீர்வு" : "Solution";
+
+      document.getElementById("uiBtnPrev").textContent = isTa ? "முந்தைய வினா" : "Previous";
+      document.getElementById("uiBtnNext").textContent = isTa ? "அடுத்த வினா" : "Next";
+      
+      updateFinishButtonText();
+
+      document.getElementById("uiRepHeading").textContent = isTa ? "முடிவு / மதிப்பெண் அறிக்கை" : "Result / Score Report";
+      document.getElementById("uiThQ").textContent = isTa ? "கேள்வி" : "Question";
+      document.getElementById("uiThYou").textContent = isTa ? "உங்கள் விடை" : "Your Answer";
+      document.getElementById("uiThCor").textContent = isTa ? "சரியான விடை" : "Correct Answer";
+      document.getElementById("uiRepHome").textContent = isTa ? "முகப்புக்குச் செல்" : "Go to Home";
+
+      document.getElementById("uiAudioToggle").textContent = isTa ? "ஒலி இயக்கம்" : "Audio Mode";
+      document.getElementById("uiAudioPlay").textContent = isTa ? "படி" : "Read";
+
+      document.getElementById("uiExitTitle").textContent = isTa ? "முகப்புத் திரைக்குச் செல்லும் முன் ஒன்றைத் தேர்ந்தெடுக்கவும்:" : "Choose before returning to home:";
+      document.getElementById("uiExitSave").textContent = isTa ? "சேமி - முழுவதையும் சேமித்துச் செல்" : "Save - Save all and exit";
+      document.getElementById("uiExitDel").textContent = isTa ? "அழி - எல்லாவற்றையும் அழித்துச் செல்" : "Delete - Clear all and exit";
+      document.getElementById("uiExitCancel").textContent = isTa ? "ரத்து செய்யவும்" : "Cancel";
+    }
+
+    function updateFinishButtonText() {
+      const isTa = currentLang === "ta";
+      const btnTxt = document.getElementById("uiBtnFinishTxt");
+      if (isPractice) {
+        btnTxt.textContent = isTa ? "முடிவைப் பார்" : "View Result";
+      } else {
+        btnTxt.textContent = isTa ? "முடித்தல்" : "Finish";
+      }
+    }
+
+    function toggleTheme() {
+      currentTheme = currentTheme === "dark" ? "light" : "dark";
+      document.body.classList.toggle("light-mode", currentTheme === "light");
+    }
+
+    function validateStudentInputs() {
+      const name = document.getElementById("stuName").value.trim();
+      const school = document.getElementById("stuSchool").value.trim();
+      const errBox = document.getElementById("uiHomeErr");
+      if (!name || !school) {
+        errBox.style.display = "block";
+        errBox.textContent = currentLang === "ta" ? "தயவுசெய்து மாணவர் பெயர் மற்றும் பள்ளியின் பெயரை உள்ளிடவும்!" : "Please enter student name and school name!";
+        return false;
+      }
+      errBox.style.display = "none";
+      return true;
+    }
+
+    function startSession(modeKey, practiceFlag) {
+      if (!validateStudentInputs()) return;
+      isPractice = practiceFlag;
+      userAnswers = {};
+      revealedStatus = {};
+      currentIndex = 0;
+      chocoCount = 0;
+      updateChocoBadge();
+
+      let rawQuestions = [];
+      if (modeKey === "all") {
+        rawQuestions = [...QUESTIONS];
+      } else if (modeKey === "quick") {
+        rawQuestions = getRandomSubset(QUESTIONS, 15);
+      } else if (modeKey === "mega") {
+        rawQuestions = getRandomSubset(QUESTIONS, 30);
+      } else {
+        rawQuestions = QUESTIONS.filter(q => q.unit === modeKey);
+      }
+
+      if (rawQuestions.length === 0) {
+        alert("No questions found for this selection.");
+        return;
+      }
+
+      activeSessionQuestions = rawQuestions.map(q => shuffleQuestionOptions(q));
+
+      document.getElementById("homeView").classList.add("hidden");
+      document.getElementById("quizView").classList.remove("hidden");
+      document.getElementById("reportView").classList.add("hidden");
+
+      if (isPractice) {
+        document.getElementById("audioDock").classList.remove("hidden");
+      } else {
+        document.getElementById("audioDock").classList.add("hidden");
+      }
+
+      const showAnsBtnElem = document.getElementById("showAnsBtnElem");
+      const tabsBarElem = document.getElementById("tabsBarElem");
+      const tabBodies = document.querySelectorAll(".tab-body");
+
+      if (isPractice) {
+        showAnsBtnElem.classList.add("hidden");
+        tabsBarElem.classList.add("hidden");
+        tabBodies.forEach(b => {
+          b.classList.add("hidden");
+          b.classList.remove("active");
+        });
+      } else {
+        showAnsBtnElem.classList.remove("hidden");
+        tabsBarElem.classList.remove("hidden");
+        tabBodies.forEach(b => b.classList.remove("hidden"));
+        switchTab(activeTab);
+      }
+
+      updateFinishButtonText();
+      renderCircleRow();
+      loadQuestion();
+    }
+
+    function getRandomSubset(arr, count) {
+      const shuffled = [...arr].sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, count);
+    }
+
+    function renderCircleRow() {
+      const row = document.getElementById("uiCircleRow");
+      row.innerHTML = "";
+      activeSessionQuestions.forEach((_, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "num-circle";
+        btn.textContent = idx + 1;
+        if (idx === currentIndex) btn.classList.add("active");
+        if (userAnswers[idx] !== undefined) {
+          const q = activeSessionQuestions[idx];
+          if (userAnswers[idx] === q.ans) {
+            btn.classList.add("is-correct");
+          } else {
+            btn.classList.add("is-wrong");
+          }
+        }
+        btn.onclick = () => {
+          currentIndex = idx;
+          loadQuestion();
+        };
+        row.appendChild(btn);
+      });
+    }
+
+    function loadQuestion() {
+      const q = activeSessionQuestions[currentIndex];
+      const qData = q[currentLang];
+
+      const total = activeSessionQuestions.length;
+      document.getElementById("uiQCounter").textContent = `${currentLang === "ta" ? "கேள்வி" : "Question"} ${String(currentIndex + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+      
+      const unitObj = UNITS.find(u => u.id === q.unit);
+      const unitName = unitObj ? (currentLang === "ta" ? unitObj.ta.replace(/^\d+\.\s*/, '') : unitObj.en.replace(/^\d+\.\s*/, '')) : "";
+      const modeName = isPractice ? (currentLang === "ta" ? "பயிற்சி நிலை" : "Practice Mode") : (currentLang === "ta" ? "புத்தக நிலை" : "Book Mode");
+      document.getElementById("uiQSubmode").textContent = `${unitName} • ${modeName}`;
+
+      const progress = ((currentIndex + 1) / total) * 100;
+      document.getElementById("uiProgressBar").style.width = `${progress}%`;
+
+      document.getElementById("uiQText").textContent = qData.q;
+      renderDiagram(q.diagram);
+
+      const stack = document.getElementById("uiOptionStack");
+      stack.innerHTML = "";
+
+      qData.opts.forEach((optText, oIdx) => {
+        const card = document.createElement("div");
+        card.className = "opt-card";
+
+        const selAns = userAnswers[currentIndex];
+        const isRevealed = revealedStatus[currentIndex];
+
+        if (selAns !== undefined) {
+          card.classList.add("done");
+          if (oIdx === q.ans) {
+            card.classList.add("right-pick");
+          } else if (oIdx === selAns && selAns !== q.ans) {
+            card.classList.add("wrong-pick");
+          }
+        } else if (isRevealed && !isPractice) {
+          if (oIdx === q.ans) {
+            card.classList.add("right-pick");
+          }
+        }
+
+        card.innerHTML = `<span>${optText}</span><span>${OPT_LABELS[oIdx]}</span>`;
+        if (selAns === undefined) {
+          card.onclick = () => selectOption(oIdx);
+        }
+        stack.appendChild(card);
+      });
+
+      const banner = document.getElementById("uiResultBanner");
+      const selAns = userAnswers[currentIndex];
+      if (selAns !== undefined) {
+        banner.classList.add("show");
+        if (selAns === q.ans) {
+          banner.className = "result-banner show ok";
+          banner.textContent = currentLang === "ta" ? "✓ சரியான விடை!" : "✓ Correct Answer!";
+        } else {
+          banner.className = "result-banner show no";
+          banner.textContent = currentLang === "ta" ? `✗ தவறு! சரியான விடை: ${qData.opts[q.ans]}` : `✗ Incorrect! Correct answer: ${qData.opts[q.ans]}`;
+        }
+      } else {
+        banner.className = "result-banner";
+        banner.textContent = "";
+      }
+
+      if (!isPractice) {
+        document.getElementById("tabFormulaBody").textContent = qData.formula;
+        document.getElementById("tabExplainBody").textContent = qData.explain;
+        document.getElementById("tabSolutionBody").textContent = qData.solution;
+      }
+
+      renderCircleRow();
+    }
+
+    function selectOption(oIdx) {
+      if (userAnswers[currentIndex] !== undefined) return;
+      userAnswers[currentIndex] = oIdx;
+
+      const q = activeSessionQuestions[currentIndex];
+      if (oIdx === q.ans) {
+        chocoCount++;
+        updateChocoBadge();
+        dropChocolates();
+      }
+
+      loadQuestion();
+    }
+
+    function dropChocolates() {
+      const container = document.createElement("div");
+      container.className = "choco-rain-container";
+      document.body.appendChild(container);
+
+      const items = ["🍫", "🍬", "🍩", "✨"];
+      for (let i = 0; i < 28; i++) {
+        const el = document.createElement("div");
+        el.className = "falling-choco";
+        el.textContent = items[Math.floor(Math.random() * items.length)];
+        el.style.left = Math.random() * 100 + "vw";
+        el.style.animationDuration = (Math.random() * 0.9 + 0.9) + "s";
+        el.style.animationDelay = (Math.random() * 0.3) + "s";
+        container.appendChild(el);
+      }
+
+      setTimeout(() => {
+        container.remove();
+      }, 1800);
+    }
+
+    function revealCorrectAnswer() {
+      if (isPractice) return;
+      revealedStatus[currentIndex] = true;
+      loadQuestion();
+    }
+
+    function switchTab(tabName) {
+      if (isPractice) return;
+      activeTab = tabName;
+      ['formula', 'explain', 'solution'].forEach(t => {
+        const btn = document.getElementById(`tab${t.charAt(0).toUpperCase() + t.slice(1)}Btn`);
+        const body = document.getElementById(`tab${t.charAt(0).toUpperCase() + t.slice(1)}Body`);
+        if (t === tabName) {
+          btn.classList.add("active");
+          body.classList.add("active");
+        } else {
+          btn.classList.remove("active");
+          body.classList.remove("active");
+        }
+      });
+    }
+
+    function goPrev() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        loadQuestion();
+      }
+    }
+
+    function goNext() {
+      if (currentIndex < activeSessionQuestions.length - 1) {
+        currentIndex++;
+        loadQuestion();
+      }
+    }
+
+    function requestHomeExit() {
+      document.getElementById("exitModal").classList.add("open");
+    }
+
+    function closeExitModal() {
+      document.getElementById("exitModal").classList.remove("open");
+    }
+
+    function saveAndGoHome() {
+      closeExitModal();
+      toHome();
+    }
+
+    function deleteAndGoHome() {
+      userAnswers = {};
+      revealedStatus = {};
+      closeExitModal();
+      toHome();
+    }
+
+    function toHome() {
+      document.getElementById("homeView").classList.remove("hidden");
+      document.getElementById("quizView").classList.add("hidden");
+      document.getElementById("reportView").classList.add("hidden");
+      document.getElementById("audioDock").classList.add("hidden");
+    }
+
+    function openReport() {
+      document.getElementById("quizView").classList.add("hidden");
+      document.getElementById("audioDock").classList.add("hidden");
+      document.getElementById("reportView").classList.remove("hidden");
+
+      const name = document.getElementById("stuName").value.trim();
+      const school = document.getElementById("stuSchool").value.trim();
+      const cls = document.getElementById("stuClass").value.trim();
+      const sec = document.getElementById("stuSection").value.trim();
+
+      let correctCount = 0;
+      let totalCount = activeSessionQuestions.length;
+
+      activeSessionQuestions.forEach((q, idx) => {
+        if (userAnswers[idx] === q.ans) correctCount++;
+      });
+
+      const infoSummary = document.getElementById("uiStudentInfoSummary");
+      const isTa = currentLang === "ta";
+      const clsStr = cls ? cls : "-";
+      const secStr = sec ? sec : "-";
+      infoSummary.textContent = isTa 
+        ? `மாணவர்: ${name} | பள்ளி: ${school} | வகுப்பு: ${clsStr} | பிரிவு: ${secStr}`
+        : `Student: ${name} | School: ${school} | Class: ${clsStr} | Section: ${secStr}`;
+
+      const chocoSummary = document.getElementById("uiChocoSummary");
+      chocoSummary.textContent = isTa ? `🍫 பெற்ற சாக்லேட்டுகள்: ${chocoCount}` : `🍫 Chocolates Earned: ${chocoCount}`;
+
+      const summary = document.getElementById("uiRepSummary");
+      summary.textContent = isTa ? `மதிப்பெண்: ${correctCount} / ${totalCount}` : `Score: ${correctCount} / ${totalCount}`;
+
+      const rowsContainer = document.getElementById("uiRepRows");
+      rowsContainer.innerHTML = "";
+
+      activeSessionQuestions.forEach((q, idx) => {
+        const qData = q[currentLang];
+        const userAns = userAnswers[idx];
+        const tr = document.createElement("tr");
+
+        const userOptStr = userAns !== undefined ? qData.opts[userAns] : (isTa ? "பதிலளிக்கவில்லை" : "Not Answered");
+        const corOptStr = qData.opts[q.ans];
+
+        tr.innerHTML = `
+          <td>${idx + 1}</td>
+          <td>${qData.q}</td>
+          <td style="color:${userAns === q.ans ? 'var(--ok-text)' : 'var(--no-text)'}">${userOptStr}</td>
+          <td style="color:var(--ok-text)">${corOptStr}</td>
+        `;
+        rowsContainer.appendChild(tr);
+      });
+    }
+
+    function toggleAudioEngine() {
+      audioEnabled = !audioEnabled;
+      const speakerBtn = document.getElementById("uiHeaderSpeakerBtn");
+      if (speakerBtn) {
+        speakerBtn.textContent = audioEnabled ? "🔊" : "🔇";
+        speakerBtn.classList.toggle("active-speaker", audioEnabled);
+      }
+      if (!audioEnabled && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    }
+
+    function speakCurrent() {
+      if (!audioEnabled) {
+        return;
+      }
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const q = activeSessionQuestions[currentIndex];
+        const qData = q[currentLang];
+        const textToSpeak = `${qData.q}. Options: ${qData.opts.join(", ")}`;
+        speechUtterance = new SpeechSynthesisUtterance(textToSpeak);
+        speechUtterance.lang = currentLang === "ta" ? "ta-IN" : "en-US";
+        window.speechSynthesis.speak(speechUtterance);
+      }
+    }
+
+    window.onload = initApp;
+  </script>
+</body>
+</html>
